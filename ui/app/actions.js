@@ -747,12 +747,12 @@ function updateGasData ({
   return (dispatch) => {
     dispatch(actions.gasLoadingStarted())
     let gasPrice
-    return (() => new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
        background.getGasPrice((err, data) => {
            if(err !== null) return reject(err);
            return resolve(data);
        })
-    }))()
+    })
     .then(estimateGasPrice => {
       gasPrice = estimateGasPrice
       return estimateGas({
